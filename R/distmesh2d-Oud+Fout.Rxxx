@@ -1,0 +1,96 @@
+"distmesh2d" <-
+function(fd, fh, h0, bbox, p=NULL, pfix=array(0,dim=c(0,2)),
+  ..., dptol=.001, ttol=.1, Fscale=1.1, deltat=.2,
+  geps=.001*h0, deps=sqrt(.Machine$double.eps)*h0,
+  plot.freq=1, maxiter=1000){
+
+  require(tripack); # delaunayn does not return a specific class
+                    # and has no associate print/plot functions ... yet
+
+  rownorm2 = function(x) drop(sqrt((x^2)%*%c(1,1)))
+
+  if(any(apply(bbox,2,diff)==0))
+     stop("Supplied bounding box has zero area.")
+
+  if(is.null(p)){
+    #%1 generate initial grid
+    w = expand.grid(x=seq(bbox[1,1], bbox[2,1], by=h0), y=seq(bbox[1,2],bbox[2,2], by=h0*sqrt(3)/2));
+    w$x[2*(1:(length(w$x)/2))] = w$x[2*(1:(length(w$x)/2))] + h0/2;
+    p = cbind(x=w$x, y=jitter(w$y));             # jitter to avoid error in tri.mesh
+
+    #%2 remove nodes outside boundary specified by fd (points evaluated negative are
+    # considered to lie inside the boundary)
+    p = p[fd(p,...) < geps,]
+  }
+
+  r0 = 1 / fh(p,...)^2                           # acceptance probability
+  p = rbind(pfix, p[runif(nrow(p))<r0/max(r0),]) # rejection sampling
+  N = nrow(p)
+  if(N<=3)
+    stop("Not enough starting points inside boundary (is h0 too large?).")
+
+  on.exit(return(invisible(p)));                 # in case we need to stop earlier
+  cat("Press esc if the mesh seems fine but the algorithm hasn't converged.\n")
+  flush.console();
+
+  #%3 main loop: iterative improvement of points
+  pold = 1.0/.Machine$double.eps;
+  plt  = as.integer(min(1,abs(1/plot.freq)))
+  iter = 0
+  xlim = bbox[,which.max(apply(bbox,2,diff))]
+  while(TRUE){
+    if( max( rownorm2(p-pold)/h0 )>ttol ){
+        pold = p;
+
+        tr = tri.mesh(p[,1],p[,2]);                           # generate a Delaunay triangulation
+        T  = triangles(tr);                                   # extract the triangles
+        # must be changed to: T = delaunayn(p)
+
+        pmid = (p[T[,1],] + p[T[,2],] + p[T[,3],])/3          # calculate average of node locations as centers
+        T  = T[fd(pmid, ...) < (-geps),1:3];                  # remove triangles with center outside region
+        attr(p,"triang") = T
+
+        #%4 describe edges by uniqe pairs of nodes
+        bars = unique(rbind(T[,-1],T[,-2],T[,-3]),MARGIN=1);  # select unique edges
+        bars = bars[order(bars[,1],bars[,2]),];               # order the edges according to the node indices
+
+        #%5 Graphical display
+        if(iter %% plt == 0)
+           plot(tr,xlim=xlim,ylim=xlim);
+    }
+
+    #%6 compute force F on the basis of edge lenghts
+    barvec = p[bars[,1],] - p[bars[,2],]                      # bar vectors
+    L = rownorm2(barvec)                                      # their lengths
+
+    # calculate desired lengths L0 by use of fh
+    hbars = fh((p[bars[,1],]+p[bars[,2],])/2)
+    L0 = hbars * Fscale * (sum(L^2)/sum(hbars^2))^.5;
+    F = drop(L0-L); F[F<0] = 0;                               # the forces on the edges = max(L0-L,0)
+
+
+    Fvec = barvec * (F/L)
+    Ftot = matrix(0,N,2);
+    ii = bars[,c(1,1,2,2)]
+    jj = rep(1,length(F)) %o% c(1,2,1,2)
+    s  = c(cbind(-Fvec,Fvec))
+    for(k in 1:length(s))                                     # sum all forces on each node
+        Ftot[ii[k],jj[k]] = Ftot[ii[k],jj[k]] + s[k];
+    if(nrow(pfix)>0) Ftot[1:nrow(pfix),] = 0;                 # Force = 0 at fixed points
+    p = p - deltat*Ftot;
+
+    #%7 excercise normal force at boundary: move overshoot points to nearest boundary point
+    d = fd(p, ...);
+    ix= d>0;                                                  # find points outside
+    dgradx = (fd(cbind(p[ix,1]+deps/2,p[ix,2]), ...) - d[ix])/deps # numerical
+    dgrady = (fd(cbind(p[ix,1],p[ix,2])+deps/2, ...) - d[ix])/deps # Jacobian matrix
+    p[ix,] = p[ix,] - cbind(d[ix]*dgradx, d[ix]*dgrady);      # Project back to boundary
+
+    #%8 test for convergence
+    if(max(rownorm2(Ftot[d < -geps,])) < dptol | iter>=maxiter) break;
+    iter = iter + 1
+  }
+  if(iter>=maxiter)
+    warning(" Maximum iterations reached. Relaxation process not \n completed")
+  return(p);
+}
