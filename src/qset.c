@@ -1019,8 +1019,10 @@ void qh_setprint(FILE *fp, char* string, setT *set) {
     fprintf (fp, "%s set is null\n", string);
   else {
     SETreturnsize_(set, size);
-    fprintf (fp, "%s set=%p maxsize=%d size=%d elems=",
-	     string, set, set->maxsize, size);
+    /* fprintf (fp, "%s set=%p maxsize=%d size=%d elems=", */
+    fprintf (fp, "%s maxsize=%d size=%d elems=",
+	     string, set->maxsize, size);
+    /*  string, set, set->maxsize, size); */
     if (size > set->maxsize)
       size= set->maxsize+1;
     for (k=0; k < size; k++)
@@ -1113,8 +1115,10 @@ setT *qh_settemp(int setsize) {
   newset= qh_setnew (setsize);
   qh_setappend ((setT **)&qhmem.tempstack, newset);
   if (qhmem.IStracing >= 5)
-    fprintf (qhmem.ferr, "qh_settemp: temp set %p of %d elements, depth %d\n",
-       newset, newset->maxsize, qh_setsize ((setT*)qhmem.tempstack));
+    /* fprintf (qhmem.ferr, "qh_settemp: temp set %p of %d elements, depth %d\n",
+       newset, newset->maxsize, qh_setsize ((setT*)qhmem.tempstack)); */
+    fprintf (qhmem.ferr, "qh_settemp: of %d elements, depth %d\n",
+       newset->maxsize, qh_setsize ((setT*)qhmem.tempstack));
   return newset;
 } /* settemp */
 
@@ -1143,9 +1147,12 @@ void qh_settempfree(setT **set) {
   stackedset= qh_settemppop ();
   if (stackedset != *set) {
     qh_settemppush(stackedset);
-    fprintf (qhmem.ferr, "qhull internal error (qh_settempfree): set %p (size %d) was not last temporary allocated (depth %d, set %p, size %d)\n",
+    /* fprintf (qhmem.ferr, "qhull internal error (qh_settempfree): set %p (size %d) was not last temporary allocated (depth %d, set %p, size %d)\n",
 	     *set, qh_setsize(*set), qh_setsize((setT*)qhmem.tempstack)+1,
-	     stackedset, qh_setsize(stackedset));
+	     stackedset, qh_setsize(stackedset)); */
+    fprintf (qhmem.ferr, "qhull internal error (qh_settempfree): (size %d) was not last temporary allocated (depth %d, size %d)\n",
+	     qh_setsize(*set), qh_setsize((setT*)qhmem.tempstack)+1,
+	     qh_setsize(stackedset));
     qh_errexit (qhmem_ERRqhull, NULL, NULL);
   }
   qh_setfree (set);
@@ -1191,8 +1198,10 @@ setT *qh_settemppop(void) {
     qh_errexit (qhmem_ERRqhull, NULL, NULL);
   }
   if (qhmem.IStracing >= 5)
-    fprintf (qhmem.ferr, "qh_settemppop: depth %d temp set %p of %d elements\n",
-       qh_setsize((setT*)qhmem.tempstack)+1, stackedset, qh_setsize(stackedset));
+    /*fprintf (qhmem.ferr, "qh_settemppop: depth %d temp set %p of %d elements\n",
+      qh_setsize((setT*)qhmem.tempstack)+1, stackedset, qh_setsize(stackedset)); */
+   fprintf (qhmem.ferr, "qh_settemppop: depth %d temp of %d elements\n",
+       qh_setsize((setT*)qhmem.tempstack)+1, qh_setsize(stackedset));
   return stackedset;
 } /* settemppop */
 
@@ -1212,8 +1221,10 @@ void qh_settemppush(setT *set) {
   
   qh_setappend ((setT**)&qhmem.tempstack, set);
   if (qhmem.IStracing >= 5)
-    fprintf (qhmem.ferr, "qh_settemppush: depth %d temp set %p of %d elements\n",
-    qh_setsize((setT*)qhmem.tempstack), set, qh_setsize(set));
+    /* fprintf (qhmem.ferr, "qh_settemppush: depth %d temp set %p of %d elements\n",
+       qh_setsize((setT*)qhmem.tempstack), set, qh_setsize(set)); */
+    fprintf (qhmem.ferr, "qh_settemppush: depth %d temp of %d elements\n",
+    qh_setsize((setT*)qhmem.tempstack), qh_setsize(set));
 } /* settemppush */
 
  

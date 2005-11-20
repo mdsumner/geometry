@@ -1,5 +1,4 @@
 * port __vonoroi__.cc
-* get rid of output to console in convhulln (specifying NULL as standard output
 handle gives wrong result)
 * more self explaining interface for qhull options (?)
 * less rudimentary version of distmesh2d and distmeshNd

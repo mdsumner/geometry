@@ -905,8 +905,12 @@ void qh_initflags(char *command) {
           qh FORCEoutput= True;
           break;
         case 'p':
-          qh_option ("Pprecision-ignore", NULL, NULL);
-          qh PRINTprecision= False;
+          qh_option ("Pprecision", NULL, NULL);
+          qh PRINTprecision= True;
+          break;
+        case 's':
+          qh_option ("Psummary", NULL, NULL);
+          qh PRINTsummary= True;
           break;
 	case 'A':
 	  if (!isdigit (*s))
@@ -1732,7 +1736,7 @@ void qh_initqhull_mem (void) {
 */
 void qh_initqhull_start (FILE *infile, FILE *outfile, FILE *errfile) {
 
-  qh_CPUclock; /* start the clock */
+  /* qh_CPUclock;*/ /* start the clock; Bobby commented this out */
 #if qh_QHpointer
   if (!(qh_qh= (qhT *)malloc (sizeof(qhT)))) {
     fprintf (errfile, "qhull error (qh_initqhull_globals): insufficient memory\n");
@@ -1768,7 +1772,8 @@ void qh_initqhull_start (FILE *infile, FILE *outfile, FILE *errfile) {
   qh outside_err= REALmax;
   qh premerge_centrum= 0.0;
   qh premerge_cos= REALmax;
-  qh PRINTprecision= True;
+  qh PRINTprecision= False;
+  qh PRINTsummary= False;
   qh PRINTradius= 0.0;
   qh postmerge_cos= REALmax;
   qh postmerge_centrum= 0.0;

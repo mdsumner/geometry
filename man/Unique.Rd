@@ -19,7 +19,7 @@ Unique(X, rows.are.sets=FALSE)
   Matrix of the same number of columns as \code{x}, with the unique rows in \code{x} sorted according
   to the columns of \code{x}. If \code{rows.are.sets = TRUE} the rows are also sorted.
 }
-\notes{
+\note{
     \sQuote{\code{Unique}} is (under circumstances) much quicker than the more generic base function
     \sQuote{\code{unique}}.
 }

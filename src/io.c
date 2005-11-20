@@ -51,8 +51,8 @@ void qh_produce_output(void) {
     qh_markkeep (qh facet_list);
   if (qh PRINTsummary)
     qh_printsummary(qh ferr);
-  else if (qh PRINTout[0] == qh_PRINTnone)
-    qh_printsummary(qh fout);
+  /*else if (qh PRINTout[0] == qh_PRINTnone)
+    qh_printsummary(qh fout);*/
   for (i= 0; i < qh_PRINTEND; i++)
     qh_printfacets (qh fout, qh PRINTout[i], qh facet_list, NULL, !qh_ALL);
   qh_allstatistics();
@@ -68,9 +68,9 @@ void qh_produce_output(void) {
     fprintf(qh ferr, "\
     size in bytes: merge %d ridge %d vertex %d facet %d\n\
          normal %d ridge vertices %d facet vertices or neighbors %d\n",
-	    sizeof(mergeT), sizeof(ridgeT),
-	    sizeof(vertexT), sizeof(facetT),
-	    qh normal_size, d_1, d_1 + SETelemsize);
+	    (int) sizeof(mergeT), (int) sizeof(ridgeT),
+	    (int) sizeof(vertexT), (int) sizeof(facetT),
+	    qh normal_size, d_1, (int) (d_1 + SETelemsize));
   }
   if (qh_setsize ((setT*)qhmem.tempstack) != tempsize) {
     fprintf (qh ferr, "qhull internal error (qh_produce_output): temporary sets not empty (%d)\n",

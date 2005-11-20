@@ -1,7 +1,8 @@
 "tetramesh" <-
 function (T, X, col = heat.colors(nrow(T)), clear = TRUE, ...)
 {
-    require(rgl)
+    if(require(rgl) == FALSE)
+        stop("the rgl package is required for tetramesh")
     if (!is.numeric(T) | !is.numeric(T))
         stop("`T' and `X' should both be numeric.")
     if (ncol(T) != 4)
