@@ -38,14 +38,13 @@ Software,} Dec 1996.}
 \url{http://www.qhull.org}
 }
 
-\author{ Raoul Grasman }
+\author{ Raoul Grasman  and Robert B. Gramacy \email{bobby@statslab.cam.ac.uk} }
 \note{ This intents to be a port of the Octave's (\url{http://www.octave.org}) geometry
 library. The sources originals were from Kai Habel.
 
-Currently a call to convhulln unavoidably generates a diagnostic report
-on an Rterm console. This is to be removed in future release. See \link{surf.tri}
-for a quiet alternative, which computes the hull from a Delaunay
-triangulation of the points.
+All console printing is sent to a file in the CWD called \dQuote{qhull\_out.txt} unless another
+file is specified with the TO option -- see the qhull documentation.  To get the
+usual progress-related output specify the R-specific option "Pp Ps".
 
 See further notes in \link{delaunayn}.
 }

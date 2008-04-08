@@ -51,7 +51,8 @@ Software,} Dec 1996.}
 \url{http://www.qhull.org}
 }
 
-\author{ Raoul Grasman; based on the corresponding Octave sources of Kai Habel. }
+\author{ Raoul Grasman and Robert B. Gramacy \email{bobby@statslab.cam.ac.uk}; 
+based on the corresponding Octave sources of Kai Habel. }
 
 \note{
 This intents to be a port of the Octave's (\url{http://www.octave.org}) geometry
@@ -59,6 +60,10 @@ library. The sources originals were from Kai Habel.
 
 The current implementation calls Qhull always with the "QJ" option. (See Qhull
 documentation for details).
+
+All console printing is sent to a file in the CWD called \dQuote{qhull\_out.txt} unless another
+file is specified with the TO option -- see the qhull documentation.
+To get the usual progress-related output specify the R-specific option "Pp Ps".
 
 Qhull does not support constrained Delaunay triangulations, triangulation of
 non-convex surfaces, mesh generation of non-convex objects, or medium-sized

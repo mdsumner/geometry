@@ -54,7 +54,8 @@ SEXP convhulln(const SEXP p, const SEXP options)
 	double *pt_array;
 
 
-	FILE *outfile = stdout;      /* output from qh_produce_output() use NULL to skip qh_produce_output() */
+	/* Bobby */ /*FILE *outfile = stdout; */     /* output from qh_produce_output() use NULL to skip qh_produce_output() */
+	FILE *outfile = fopen("qhull_out.txt", "a"); /* Bobby */
 	FILE *errfile = stderr;      /* error messages from qhull code */
 
 	retval = R_NilValue;
@@ -134,5 +135,8 @@ SEXP convhulln(const SEXP p, const SEXP options)
 		warning("convhulln: did not free %d bytes of long memory (%d pieces)",
 			totlong, curlong);
 	}
+
+	fclose(outfile); /* Bobby */
+
 	return retval;
 }

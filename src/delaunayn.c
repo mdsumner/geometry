@@ -103,7 +103,8 @@ SEXP delaunayn(const SEXP p, const SEXP options)
 		ismalloc = False;   /* True if qhull should free points in qh_freeqhull() or reallocation */
 
 		sprintf(flags,"qhull d Qbb QJ T0 %s", opts); 
-		outfile = NULL;
+		/* outfile = NULL; */ /* Bobby */
+		outfile = fopen("qhull_out.txt", "a"); /* Bobby */
 		exitcode = qh_new_qhull (dim, n, pt_array, ismalloc, flags, outfile, errfile); 
 					/*If you want some debugging information replace the NULL
 					pointer with outfile.
@@ -159,6 +160,9 @@ SEXP delaunayn(const SEXP p, const SEXP options)
 		}
 		UNPROTECT(1);
 	}
+
+	fclose(outfile); /* Bobby */
+
 	return retval;
 }
 
