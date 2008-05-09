@@ -43,8 +43,8 @@ documentation for the available options.)\n\n\
 */
 SEXP convhulln(const SEXP p, const SEXP options)
 {
-	SEXP retval;
-	int curlong, totlong, i, j;
+  SEXP retval, area, vol, retlist, retnames;
+	int curlong, totlong, i, j, retlen;
 	unsigned int dim, n;
 	int exitcode; 
 	boolT ismalloc;
@@ -53,6 +53,9 @@ SEXP convhulln(const SEXP p, const SEXP options)
 	int *idx;
 	double *pt_array;
 
+	/* Bobby */
+	area = vol = retlist = NULL;
+	retlen = 1;
 
 	/* Bobby */ /*FILE *outfile = stdout; */     /* output from qh_produce_output() use NULL to skip qh_produce_output() */
 	FILE *outfile = fopen("qhull_out.txt", "a"); /* Bobby */
@@ -126,7 +129,36 @@ SEXP convhulln(const SEXP p, const SEXP options)
 		for(i=0;i<nrows(retval);i++)
 			for(j=0;j<ncols(retval);j++)
 				INTEGER(retval)[i+nrows(retval)*j] = idx[i+n*j];
-		UNPROTECT(1);
+
+		/* Bobby: return area and volume */
+		if (qh totarea != 0.0) {
+		  PROTECT(area = allocVector(REALSXP, 1));
+		  REAL(area)[0] = qh totarea;
+		  retlen++;
+		}
+		if (qh totvol != 0.0) {
+		  PROTECT(vol = allocVector(REALSXP, 1));
+		  REAL(vol)[0] = qh totvol;
+		  retlen++;
+		}
+
+		/* Bobby: make a list if there is area or volume */
+		if(retlen > 1) {
+		  PROTECT(retlist = allocVector(VECSXP, retlen));
+		  PROTECT(retnames = allocVector(VECSXP, retlen));
+		  retlen += 2;
+		  SET_VECTOR_ELT(retlist, 0, retval);
+		  SET_VECTOR_ELT(retnames, 0, mkChar("hull"));
+		  SET_VECTOR_ELT(retlist, 1, area);
+		  SET_VECTOR_ELT(retnames, 1, mkChar("area"));
+		  SET_VECTOR_ELT(retlist, 2, vol);
+		  SET_VECTOR_ELT(retnames, 2, mkChar("vol"));
+		  setAttrib(retlist, R_NamesSymbol, retnames);
+		} else retlist = retval;
+
+		/* Bobby */
+		UNPROTECT(retlen);
+		/* UNPROTECT(1); */
 	}
 	qh_freeqhull(!qh_ALL);					/*free long memory */
 	qh_memfreeshort (&curlong, &totlong);	/* free short memory and memory allocator */
@@ -138,5 +170,7 @@ SEXP convhulln(const SEXP p, const SEXP options)
 
 	fclose(outfile); /* Bobby */
 
-	return retval;
+	/* Bobby: */
+	return retlist;
+	/* return retval; */
 }

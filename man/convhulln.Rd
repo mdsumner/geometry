@@ -28,7 +28,10 @@ documentation for the available options - refer to \link{delaunayn}.)
 \value{
  An \code{m}-by-\code{dim} index matrix of which each row defines
  a \code{dim}-dimensional \dQuote{triangle}. The indices refer to the
- rows in \code{p}.
+ rows in \code{p}.  If the option \code{"FA"} is provided, then the
+ output is a \code{list} with entries \code{$hull} containing the
+ matrix mentioned above, and \code{$area} and \code{$vol} with
+ the area and volume of the hull described by the matrix.
 }
 \references{
 \cite{Barber, C.B., Dobkin, D.P., and Huhdanpaa, H.T., \dQuote{The
@@ -42,9 +45,12 @@ Software,} Dec 1996.}
 \note{ This intents to be a port of the Octave's (\url{http://www.octave.org}) geometry
 library. The sources originals were from Kai Habel.
 
-All console printing is sent to a file in the CWD called \dQuote{qhull\_out.txt} unless another
-file is specified with the TO option -- see the qhull documentation.  To get the
-usual progress-related output specify the R-specific option "Pp Ps".
+All console printing is sent to a file in the CWD called
+\dQuote{qhull\_out.txt} unless another file is specified with the TO
+option -- see the qhull documentation.  To get the usual
+progress-related output specify the R-specific option \code{"Pp Ps"}.
+The option \code{"FA"} results in the area and volume of the convex hull
+to be included in the output list.
 
 See further notes in \link{delaunayn}.
 }
