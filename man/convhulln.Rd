@@ -8,22 +8,26 @@
   N-dimensional space.
 }
 \usage{
-convhulln(p, options = " ")
+convhulln(p, options = "Tv")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{p}{ An \code{n}-by-\code{dim} matrix. The rows of \code{p} represent \code{n}
-            points in \code{dim}-dimensional space.  }
-  \item{options}{ Optional options, see details below. }
+  \item{p}{ An \code{n}-by-\code{dim} matrix.
+    The rows of \code{p} represent \code{n}
+    points in \code{dim}-dimensional space.  }
+  \item{options}{ Optional options, see details below and
+    Qhull documentation. }
 }
 \details{
 This function interfaces the qhull library, and intends to be a port from
 Octave to R.
 
-The input \code{n}-by-\code{dim} matrix contains \code{n} points of dimension
-\code{dim}. If a second optional argument is given, it must be a string containing
-extra options for the underlying qhull command. (See the Qhull
-documentation for the available options - refer to \link{delaunayn}.)
+The input \code{n}-by-\code{dim} matrix contains \code{n}
+points of dimension \code{dim}. If a second optional argument
+is given, it must be a string containing extra options for the
+underlying qhull command.  The \code{options} always include
+\code{"Qt"}. (See the Qhull documentation for the available
+options - refer to \link{delaunayn}.)
 }
 \value{
  An \code{m}-by-\code{dim} index matrix of which each row defines
