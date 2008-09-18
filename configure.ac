@@ -1,4 +1,4 @@
-AC_INIT([geometry], 0.1) dnl package name, version
+AC_INIT([GEOMETRY], 0.0-3) dnl package name, version
 
 dnl find what R uses for the C compiler and initialize flags
 : ${R_HOME=`R RHOME`}
