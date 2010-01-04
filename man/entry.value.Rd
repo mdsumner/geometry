@@ -16,7 +16,7 @@ entry.value(a, idx) <- value
   \item{a}{ An array. }
   \item{idx}{ Numerical matrix with the same number of columns as the number of dimensions of \code{a}.
   Each row indices a cell in \code{a} of which the value is to be retrieved or set. }
-  \item{value} { An array of length \code{nrow(idx)}. }
+  \item{value}{ An array of length \code{nrow(idx)}. }
 }
 \value{
   \code{entry.value(a,idx)} returns a vector of values at the indicated cells.
