@@ -620,6 +620,7 @@ CPPFLAGS
 ac_ct_CC
 EXEEXT
 OBJEXT
+PKG_CFLAGS
 LIBOBJS
 LTLIBOBJS'
 ac_subst_files=''
@@ -1639,12 +1640,8 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 : ${R_HOME=`R RHOME`}
 CC=`"${R_HOME}/bin/R" CMD config CC`
-CFLAGS=""
-
-for option in -fno-strict-aliasing; do
-	SAVE_CFLAGS="$CFLAGS"
-	CFLAGS="$CFLAGS $option"
-	ac_ext=c
+CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
+ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
@@ -2564,6 +2561,12 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
+if test "${GCC}" = yes; then
+    PKG_CFLAGS=
+  for option in -fno-strict-aliasing; do
+	SAVE_CFLAGS="$CFLAGS"
+	CFLAGS="$CFLAGS $option"
+
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -2605,17 +2608,18 @@ sed 's/^/| /' conftest.$ac_ext >&5
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-	if test $has_option = no; then
+	if test "$has_option" = "no"; then
 		CFLAGS="$SAVE_CFLAGS"
+	else
+		PKG_CFLAGS="$PKG_CFLAGS $option"
 	fi
 	{ echo "$as_me:$LINENO: checking whether $CC understands $option" >&5
 echo $ECHO_N "checking whether $CC understands $option... $ECHO_C" >&6; }
 	{ echo "$as_me:$LINENO: result: $has_option" >&5
 echo "${ECHO_T}$has_option" >&6; }
-	unset has_option
-	unset SAVE_CFLAGS
-done
-unset option
+  done
+fi
+
 
 ac_config_files="$ac_config_files src/Makevars"
 
@@ -3292,11 +3296,12 @@ CPPFLAGS!$CPPFLAGS$ac_delim
 ac_ct_CC!$ac_ct_CC$ac_delim
 EXEEXT!$EXEEXT$ac_delim
 OBJEXT!$OBJEXT$ac_delim
+PKG_CFLAGS!$PKG_CFLAGS$ac_delim
 LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 46; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 47; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5
