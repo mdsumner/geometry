@@ -16,9 +16,9 @@ Description: This package makes the qhull library (www.qhull.org)
         some R functions that allow for this. Currently the package
         only gives access to Delaunay triangulation and convex hull
         computation.
-Version: 0.3-0
+Version: 0.3-1
 URL: http://geometry.r-forge.r-project.org/
-Date: 2012-04-17
+Date: 2012-05-01
 BugReports: https://r-forge.r-project.org/tracker/?group_id=1149
 Depends: R (>= 2.5.0), magic
 Suggests: rgl, R.matlab, tripack, multicore
@@ -31,6 +31,6 @@ Collate: 'convhulln.R' 'delaunayn.R' 'distmesh2d.R' 'distmeshnd.R'
         'polyarea.R'
 Repository: CRAN
 Repository/R-Forge/Project: geometry
-Repository/R-Forge/Revision: 91
-Packaged: 2012-04-17 18:15:28 UTC; rforge
-Date/Publication: 2012-04-18 04:40:57
+Repository/R-Forge/Revision: 92
+Packaged: 2012-05-01 10:15:07 UTC; rforge
+Date/Publication: 2012-05-01 13:59:00

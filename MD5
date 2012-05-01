@@ -1,7 +1,7 @@
-23cc1ceb957d5c7e1695b8c9b66710f6 *DESCRIPTION
+e4eeb497d0600f3c5327292f721c425c *DESCRIPTION
 2fff0921df3ca420c67ffa9910da7e0e *LICENSE
 9f38cc86d72166c2624181c7dc4cb081 *NAMESPACE
-f7f4c4be77f31ecce7a2e71ce31015f9 *NEWS
+104295bf5f2cda062bdc53c95bbef5ef *NEWS
 9c6b34a4cc5fd5384ff9576db63347e0 *R/Unique.R
 ac3f01d0ef19b164ab3d8eb3c8deb0ba *R/convhulln.R
 301badba53d1034362270687e91e31e5 *R/delaunayn.R
@@ -93,9 +93,9 @@ cbbddcbbcc1efdf94fdfb289a4b0e3b7 *man/tsearch.Rd
 19ced76bea3f54ecab7b9241dbf66caa *man/tsearchn.Rd
 6b89e2882ed66530fe93d130f8815f11 *src/Makevars
 d2e339ef9eb692ba77b64d5500a8fe82 *src/Makevars.in
-e05bde6792c719fb04c9780bc9245d9f *src/Rconvhulln.c
-a46ac1a30f9191893605f2bd8ac877ee *src/Rdelaunayn.c
-0ee87f647fc9528c5fcfbb4ececcd8d4 *src/Rgeometry.h
+b83c15dda715c9c7f143f063da286906 *src/Rconvhulln.c
+592185d5a50c01e8212e342dd2ba7403 *src/Rdelaunayn.c
+83ae62a11d35f339ccd5a4814db7cece *src/Rgeometry.h
 46f72079d4cc0e60b696bd111a36ca22 *src/Rtsearch.c
 33df56a158139017240ed504e0859902 *src/geom.c
 f6bf01635c613188127072f12fe00780 *src/geom.h
@@ -123,7 +123,7 @@ da58d2b7c170bc745e367dbf676e0c84 *src/stat.h
 7cec2f6d12d43e33d419e3c46ecfc9f1 *src/user.c
 ec472e2305975ef8f353734a4d454eca *src/user.h
 28168bcc3a1a8aeba3f1af22e5127b6a *src/usermem.c
-44cdbaf75ac939cd232bea4b87eb5d23 *src/userprintf.c
+9ea4bb985e782ae7233d51eed3953824 *src/userprintf.c
 02231d8c24455712e111fc051c5beead *src/userprintf_rbox.c
 1888a29bd6052b6724bf824d5bb02417 *tests/compare-tsearch-tsearchn.R
 6d25aacc0df6e3dfcbf985af0441001e *tests/compare-tsearch-tsearchn.Rout.save
