@@ -1,3 +1,36 @@
+CHANGES IN VERSION 0.3-3  - Released 2013/04/18
+
+BUG FIXES
+
+* The License has been changed to GPL (>= 3) + file LICENSE and the
+  LICENSE file made clearer. Thanks to Kurt Hornik and the CRAN
+  maintainers for alerting me to the problem and helping with a
+  solution.
+
+* Fix for Issue #1993: Error in solve.default in
+  tsearchn
+  (https://r-forge.r-project.org/tracker/index.php?func=detail&aid=1993&group_id=1149&atid=4552)
+  Thanks to Bill Denny for reporting this and suggesting a way forward
+  with a fix. Thanks to John Drake for alerting me to the recurrence
+  of the problem and Jon Clayden on the R-devel list for pointing out
+  the correct way of testing for ill-conditioned matrices.
+
+* Fix for Issue #2009: delaunayn can return degenerate simplicies by
+  default
+  (https://r-forge.r-project.org/tracker/index.php?func=detail&aid=1993&group_id=1149&atid=4552)
+  This is a follow-on of #1993, so thanks to Bill Denny for
+  highlighting the issue.
+
+* Fix for Issue #2007: Qt option given to Qhull
+  (https://r-forge.r-project.org/tracker/index.php?func=detail&aid=2007&group_id=1149&atid=4552)
+
+* The use of the multicore package in tests has been replaced by use
+  of the parallel package. Thanks to Kurk Hornik for pointing this
+  out.
+
+* Removed non-API call to R_TempDir.  Thanks to Kurk Hornik for
+  pointing this out.
+
 CHANGES IN VERSION 0.3-2  - Released 2012/05/12
 
 BUG FIXES

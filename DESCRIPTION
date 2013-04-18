@@ -1,6 +1,6 @@
 Package: geometry
 Maintainer: David C. Sterratt <david.c.sterratt@ed.ac.uk>
-License: GPL (>= 2) + file LICENSE
+License: GPL (>= 3) + file LICENSE
 Title: Mesh generation and surface tesselation
 Author: C. B. Barber, Kai Habel, Raoul Grasman, Robert B. Gramacy,
         Andreas Stahel and David C. Sterratt
@@ -16,12 +16,12 @@ Description: This package makes the qhull library (www.qhull.org)
         some R functions that allow for this. Currently the package
         only gives access to Delaunay triangulation and convex hull
         computation.
-Version: 0.3-2
+Version: 0.3-3
 URL: http://geometry.r-forge.r-project.org/
-Date: 2012-05-10
+Date: 2013-04-18
 BugReports: https://r-forge.r-project.org/tracker/?group_id=1149
 Depends: R (>= 2.5.0), magic
-Suggests: rgl, R.matlab, tripack, multicore
+Suggests: rgl, R.matlab, tripack
 Collate: 'convhulln.R' 'delaunayn.R' 'distmesh2d.R' 'distmeshnd.R'
         'entry.value.R' 'extprod3d.R' 'matmax.R' 'matmin.R'
         'matorder.R' 'matsort.R' 'mesh.dcircle.R' 'mesh.diff.R'
@@ -31,6 +31,8 @@ Collate: 'convhulln.R' 'delaunayn.R' 'distmesh2d.R' 'distmeshnd.R'
         'polyarea.R'
 Repository: CRAN
 Repository/R-Forge/Project: geometry
-Repository/R-Forge/Revision: 96
-Packaged: 2012-05-12 10:15:06 UTC; rforge
-Date/Publication: 2012-05-12 16:21:10
+Repository/R-Forge/Revision: 122
+Repository/R-Forge/DateTimeStamp: 2013-04-18 15:03:14
+Date/Publication: 2013-04-19 06:21:53
+Packaged: 2013-04-18 18:17:31 UTC; rforge
+NeedsCompilation: yes
