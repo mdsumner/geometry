@@ -1,10 +1,10 @@
-f493f58739baba6b451d0aa31fa2b09c *DESCRIPTION
+907508a411726ebdfac1667e6a62f386 *DESCRIPTION
 1860b57c8d72e05689558e80af2aac78 *LICENSE
 9f38cc86d72166c2624181c7dc4cb081 *NAMESPACE
-68116a6656a24b3c4c8c191ce6a053ba *NEWS
+77ebc662081b973b68c476208db1d9eb *NEWS
 9c6b34a4cc5fd5384ff9576db63347e0 *R/Unique.R
 e2f8ed45c6ad31b93793ea147c2f4eda *R/convhulln.R
-00784c6e22b879f720eb45d3a0ddce9a *R/delaunayn.R
+d0103ed125729c7f6ba714386c3e66cd *R/delaunayn.R
 c5b154f04657441f493a253d869ce711 *R/distmesh2d.R
 ecb52a4e84ec906efec4a9c70d2104fc *R/distmeshnd.R
 8856cbda9a42d1b46bea2c51bba0a6ac *R/dotprod.R
@@ -73,7 +73,7 @@ afd092521465b3f0bad90c455538b561 *man/Unique.Rd
 af11b92d1a96486b902a3c8079476438 *man/bary2cart.Rd
 36db27af41ff37ddeb37d87d77373aa7 *man/cart2bary.Rd
 3f1a252288ab49ce8e45db44c1e62335 *man/convhulln.Rd
-4584bf4c0b8ae28d32733f416ce814d5 *man/delaunayn.Rd
+abfcbaf2148b67bd8dcc04a42cbc19f0 *man/delaunayn.Rd
 84dc15dd0f4f9c677638084dbbfb05fa *man/distmesh2d.Rd
 17fae93a66f430135a46d568721b422c *man/distmeshnd.Rd
 8d74613097246ff595a7136b57823c1c *man/dot.Rd
@@ -91,10 +91,9 @@ fd43dace5d953325e75db81039334da5 *man/polyarea.Rd
 fdcbcdfe9263718b95f6f3b291685e0d *man/trimesh.Rd
 95ab74b4691f82221a4dd8a7f6421332 *man/tsearch.Rd
 1f555f97ee859c7c4796ab23ef98ac61 *man/tsearchn.Rd
-6b89e2882ed66530fe93d130f8815f11 *src/Makevars
-d2e339ef9eb692ba77b64d5500a8fe82 *src/Makevars.in
+9653f23bc28c4e3c63b82b6fab6c34de *src/Makevars
 41b8fefc7e11536134a420ccb9281205 *src/Rconvhulln.c
-c52aa315307a67e18f7946a3cabbc282 *src/Rdelaunayn.c
+413f6fa162b833706fad3834d70c4301 *src/Rdelaunayn.c
 c29dc40b566d982c90f7459fae27ae91 *src/Rgeometry.h
 46f72079d4cc0e60b696bd111a36ca22 *src/Rtsearch.c
 33df56a158139017240ed504e0859902 *src/geom.c
