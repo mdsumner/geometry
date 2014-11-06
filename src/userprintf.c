@@ -68,7 +68,9 @@ void qh_fprintf(FILE *fp, int msgcode, const char *fmt, ... ) {
     if (fp) {
       vfprintf(fp, fmt, args);
     } else {
-      REvprintf(fmt, args);
+      if (msgcode >= MSG_ERROR && msgcode < MSG_STDERR ) {
+        REvprintf(fmt, args);
+      }
     }
     va_end(args);
 
