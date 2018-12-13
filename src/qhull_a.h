@@ -102,13 +102,14 @@
 #elif defined(__MWERKS__) && defined(__INTEL__)
 #   define QHULL_OS_WIN
 #endif
-#if defined(__INTEL_COMPILER) && !defined(QHULL_OS_WIN)
-template <typename T>
-inline void qhullUnused(T &x) { (void)x; }
-#  define QHULL_UNUSED(x) qhullUnused(x);
-#else
-#  define QHULL_UNUSED(x) (void)x;
-#endif
+
+
+/*
+ MDS 2018-12-13  https://r-forge.r-project.org/tracker/index.php?func=detail&aid=6509&group_id=1149&atid=4552
+*/
+# define QHULL_UNUSED(x) (void)x;
+
+
 
 /***** -libqhull.c prototypes (alphabetical after qhull) ********************/
 
